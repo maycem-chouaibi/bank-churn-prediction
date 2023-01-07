@@ -32,4 +32,3 @@ model.compile(optimizer='Nadam',
 
 model.fit(x_train, y_train, epochs=50)
 
-
