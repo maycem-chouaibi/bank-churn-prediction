@@ -4,8 +4,11 @@
 
 import dataHelper
 from sklearn.model_selection import train_test_split
-import tensorflow as tf
 from tensorflow import keras
+from sklearn.metrics import confusion_matrix, classification_report
+import seaborn as sn
+import matplotlib.pyplot as plt
+import numpy as np
 
 data = dataHelper.load('churn.csv')
 
@@ -42,3 +45,11 @@ predictedValues = model.predict(x_test)
 
 #replace with binary values
 result = [1 if value > 0.5 else 0 for value in predictedValues]
+
+# calculate precision, recall, f1-score
+print(classification_report(y_test, result))
+
+# show confusion matrix
+confusionMatrix = confusion_matrix(y_test, result)
+sn.heatmap(confusionMatrix, annot=True, fmt='d')
+plt.show()
